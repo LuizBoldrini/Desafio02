@@ -75,7 +75,32 @@ class cliente {
             }
         })
     }
+    alterar(id, valores, resposta) {
+        if(valores.birthDate) {
+            valores.birthDate = moment(valores.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
+        }
+        const sql = 'UPDATE Clientes SET ? WHERE id=?'
 
+        conexao.query(sql, [valores, id], (erro, resultados) => {
+            if(erro){
+                resposta.status(404).json(erro)
+            }else {
+                resposta.status(200).json({...valores, id})
+            }
+            
+        })
+    }
+    deleta(id, resposta) {
+        const sql = 'DELETE FROM Clientes WHERE id=?'
+
+        conexao.query(sql, id, (erro, resultados) => {
+            if(erro) {
+                resposta.status(404).json(erro)
+            } else {
+                resposta.status(200).json({id})
+            }
+        })
+    }
 }
 
 module.exports = new cliente
