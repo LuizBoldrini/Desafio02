@@ -1,9 +1,9 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+const CustomExpress = require('./config/CustomExpress')
 const config = require('config');
 const conexao = require('./banco-de-dados/index')
-const Tabelas = require('./banco-de-dados/Tabelas')
+const Tabelas = require('./banco-de-dados/TabelaCilente')
+
+const app = CustomExpress() 
 
 conexao.connect(erro => {
     if(erro) {
