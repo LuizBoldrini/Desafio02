@@ -1,7 +1,7 @@
 const CustomExpress = require('./config/CustomExpress')
 const config = require('config');
 const conexao = require('./banco-de-dados/index')
-const Tabelas = require('./banco-de-dados/TabelaCilente')
+const Tabelas = require('./banco-de-dados/Tabelas')
 
 const app = CustomExpress() 
 

@@ -1,10 +1,11 @@
 const Sequelize = require('sequelize')
 
-class TabelaCliente {
+class Tabelas {
     init(conexao) {
         this.conexao = conexao
 
         this.criarClientes()
+        this.criarTask()
     };
 
     colunas = {
@@ -25,9 +26,23 @@ class TabelaCliente {
 
     }
 
+    criarTask() {
+        const sql = `CREATE TABLE IF NOT EXISTS Tasks ( description varchar(200) NOT NULL, date datetime NOT NULL, id int,CONSTRAINT fk_UserTask FOREIGN KEY (id) REFERENCES Clientes (id))`
+
+        this.conexao.query(sql, erro => {
+            if (erro) {
+                console.log(erro)
+            } else {
+                console.log('Tabela criada no banco de dados!')
+            }
+        })
+    }
+
+
+
 };
 
-module.exports = new TabelaCliente
+module.exports = new Tabelas
 
 
 

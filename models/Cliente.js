@@ -54,7 +54,7 @@ class cliente {
             if(erro){
                 resposta.status(400).json(erro)
             } else {
-                resposta.status(201).json(resultado)
+                resposta.status(201).json(cliente)
             }
         })
         }
