@@ -10,6 +10,9 @@ class cliente {
         const dataEhValida = moment(birthDate).isSameOrBefore('01-05-2004')
         const senhaEhValida = cliente.password.length >= 6
 
+        // const emaiEhValido = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i
+        // const emailFormatado = emaiEhValido.exec(cliente.email);
+
         const validacoes = [
             {
                 nome: 'birthDate',
@@ -20,7 +23,12 @@ class cliente {
                 nome: 'password',
                 valido: senhaEhValida,
                 mensagem: 'A senha deve ser maior ou igual a 6 digitos'
-            }
+            } //,
+            // {
+            //     nome: 'email',
+            //     valido: emaiEhValido,
+            //     mensagem: 'O email precisa ser válido!'
+            // }
 
         ]
         const erros = validacoes.filter(campo => !campo.valido)
@@ -41,6 +49,31 @@ class cliente {
         }
        
     
+    }
+
+    lista(resposta) {
+        const sql = 'SELECT * FROM Clientes'
+
+        conexao.query(sql, (erro, resultados) =>{
+            if(erro){
+                resposta.status(404).json(erro)
+            } else {
+                resposta.status(200).json(resultados)
+            }
+        })
+    }
+
+    buscaPorId(id, resposta) {
+        const sql = `SELECT * FROM Clientes WHERE id=${id}`
+
+        conexao.query(sql, (erro, resultados) => {
+            const cliente = resultados[0]
+            if(erro) {
+                resposta.status(404).json(erro)
+            } else {
+                resposta.status(200).json(cliente)
+            }
+        })
     }
 
 }
