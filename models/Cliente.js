@@ -6,7 +6,7 @@ class cliente {
     adiciona(cliente, resposta) {
         const birthDate = moment().format('YYYY-MM-DD')
         const clienteDatado = {...cliente, birthDate}
-        const dataEhValida = moment(birthDate).isSameOrAfter('2004-05-01')
+        const dataEhValida = moment(birthDate).isSameOrBefore('2004-05-01')
         const senhaEhValida = cliente.password.length >= 6
 
         const validacoes = [
