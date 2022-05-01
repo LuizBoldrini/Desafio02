@@ -7,28 +7,39 @@ class cliente {
         const birthDate = moment(cliente.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
         const clienteDatado = {...cliente, birthDate}
 
-        const dataEhValida = moment(birthDate).isSameOrBefore('01-05-2004')
-        const senhaEhValida = cliente.password.length >= 6
+        const dataValida = moment(birthDate).isSameOrBefore('01-05-2004')
+        const senhaValida = cliente.password.length >= 6
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cliente.email)
+        const cpfValido = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(cliente.cpf)
+        const zipCodeValido = /^[0-9]{5}-[0-9]{3}$/.test(cliente.zipCode)
 
-        // const emaiEhValido = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i
-        // const emailFormatado = emaiEhValido.exec(cliente.email);
-
+        
         const validacoes = [
             {
                 nome: 'birthDate',
-                valido: dataEhValida,
+                valido: dataValida,
                 mensagem: 'Cliente precisa ser maior de 18 anos.'
             },
             {
                 nome: 'password',
-                valido: senhaEhValida,
+                valido: senhaValida,
                 mensagem: 'A senha deve ser maior ou igual a 6 digitos'
-            } //,
-            // {
-            //     nome: 'email',
-            //     valido: emaiEhValido,
-            //     mensagem: 'O email precisa ser válido!'
-            // }
+            },
+             {
+                 nome: 'email',
+                 valido: emailValido,
+                 mensagem: 'O email não foi digitado corretamente!'
+            },
+            {
+                nome: 'cpf',
+                valido: cpfValido,
+                mensagem: 'O CPF não foi digitado corretamente!'
+           },
+           {
+               nome: 'zipCode',
+               valido: zipCodeValido,
+               mensagem: 'O zipCode não foi digitado da forma correta!'
+          }
 
         ]
         const erros = validacoes.filter(campo => !campo.valido)
