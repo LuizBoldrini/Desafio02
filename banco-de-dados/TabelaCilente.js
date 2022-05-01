@@ -1,9 +1,16 @@
+const Sequelize = require('sequelize')
+
 class TabelaCliente {
     init(conexao) {
         this.conexao = conexao
 
         this.criarClientes()
     };
+
+    colunas = {
+
+    }
+
 
     criarClientes() {
         const sql = 'CREATE TABLE IF NOT EXISTS clientes (id int NOT NULL AUTO_INCREMENT, name varchar(50) NOT NULL, CPF float NOT NULL, birthDate datetime NOT NULL, email varchar(50) NOT NULL,password varchar(20) NOT NULL, address varchar(50) NOT NULL, number varchar(10), complement text NOT NULL, city varchar(20) NOT NULL, state varchar(2), country varchar(10), zipCode float, PRIMARY KEY(id))'

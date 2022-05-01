@@ -6,7 +6,7 @@ module.exports = app => {
     app.post('/api/v1/user', (requisicao, resposta) => {
         const cliente = requisicao.body
         
-        Cliente.adiciona(cliente)
-        resposta.send('Isso é um POST')})
+        Cliente.adiciona(cliente, resposta)
 
+    })
 }
