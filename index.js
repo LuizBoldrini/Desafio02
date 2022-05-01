@@ -12,9 +12,9 @@ conexao.connect(erro => {
         console.log("Conectado ao banco de dados")
 
         Tabelas.init(conexao)
+
+        app.listen(config.get('api.porta'), () => console.log('O servidor está funcionando!'));
+     
+        app.get('/', (requisicao, resposta) => resposta.send('Você está níveis abaixo da solicitação; use"/api/v1/user" para ver os clientes '))
     }
 })
-
-app.listen(config.get('api.porta'), () => console.log('O servidor está funcionando!'));
-
-app.get('/', (requisicao, resposta) => resposta.send('Tudo certo aqui!'))
