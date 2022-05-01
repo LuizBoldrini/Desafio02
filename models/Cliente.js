@@ -4,9 +4,10 @@ const conexao = require('../banco-de-dados/index');
 
 class cliente {
     adiciona(cliente, resposta) {
-        const birthDate = moment().format('YYYY-MM-DD')
+        const birthDate = moment(cliente.birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD')
         const clienteDatado = {...cliente, birthDate}
-        const dataEhValida = moment(birthDate).isSameOrBefore('2004-05-01')
+
+        const dataEhValida = moment(birthDate).isSameOrBefore('01-05-2004')
         const senhaEhValida = cliente.password.length >= 6
 
         const validacoes = [
