@@ -78,9 +78,16 @@ class cliente {
 
         conexao.query(sql, (erro, resultados) => {
             const cliente = resultados[0]
-            if (erro) {
-                resposta.status(404).json(erro)
-            } else {
+            if (resultados.length == 0) {
+                resposta.status(404).json(
+                    [
+                        {
+                            mensagem: `Cliente com id:${id} não foi encontrado!`
+                        }
+                    ])
+            } else if(erro) {
+                resposta.status(500).json(erro)
+            }else {
                 resposta.status(200).json(cliente)
             }
         })
@@ -92,7 +99,7 @@ class cliente {
         const sql = 'UPDATE Clientes SET ? WHERE id=?'
 
         conexao.query(sql, [valores, id], (erro, resultados) => {
-            if (erro) {
+             if (erro) {
                 resposta.status(404).json(erro)
             } else {
                 resposta.status(200).json({ ...valores, id })
