@@ -11,3 +11,7 @@ Para alterar dados da api ou mysql: **config/default.json**.
 Esta configurado para iniciar no terminal com: `npm start`.
 
 Para alterar: **package.json**
+
+### Extra
+
+Clientes = Users

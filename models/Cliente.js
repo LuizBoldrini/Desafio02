@@ -17,7 +17,7 @@ class cliente {
             {
                 nome: 'birthDate',
                 valido: dataValida,
-                mensagem: 'Cliente precisa ser maior de 18 anos.'
+                mensagem: 'User precisa ser maior de 18 anos.'
             },
             {
                 nome: 'password',
@@ -82,7 +82,7 @@ class cliente {
                 resposta.status(404).json(
                     [
                         {
-                            mensagem: `Cliente com id:${id} não foi encontrado!`
+                            mensagem: `User com id:${id} não foi encontrado!`
                         }
                     ])
             } else if (erro) {
@@ -102,7 +102,7 @@ class cliente {
                     resposta.status(404).json(
                         [
                             {
-                                mensagem: `Cliente com id:${id} não foi encontrado!`
+                                mensagem: `User com id:${id} não foi encontrado!`
                             }
                         ])
                 } else if (erro) {
@@ -138,7 +138,7 @@ class cliente {
                     resposta.status(404).json(
                         [
                             {
-                                mensagem: `Cliente com id:${id} não foi encontrado!`
+                                mensagem: `User com id:${id} não foi encontrado!`
                             }
                         ])
                 } else if (erro) {
@@ -154,7 +154,7 @@ class cliente {
                 if (erro) {
                     resposta.status(404).json(erro)
                 } else {
-                    resposta.status(200).json(`Cliente com id:${id} foi deletado com sucesso!`)
+                    resposta.status(200).json(`User com id:${id} foi deletado com sucesso!`)
                 }
             })
 

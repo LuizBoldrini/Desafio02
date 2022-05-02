@@ -57,7 +57,7 @@ class task {
                 resposta.status(404).json(
                     [
                         {
-                            mensagem: `Cliente com id:${user} não foi encontrado!`
+                            mensagem: `User com id:${user} não foi encontrado!`
                         }
                     ])
             }else if(erro) {
@@ -77,7 +77,7 @@ class task {
                 resposta.status(404).json(
                     [
                         {
-                            mensagem: `Cliente com id:${user} não foi encontrado!`
+                            mensagem: `User com id:${user} não foi encontrado!`
                         }
                     ])
             }else if(erro) {
@@ -117,7 +117,7 @@ class task {
                 resposta.status(404).json(
                     [
                         {
-                            mensagem: `Cliente com id:${user} não foi encontrado!`
+                            mensagem: `User com id:${user} não foi encontrado!`
                         }
                     ])
             }else if(erro) {
