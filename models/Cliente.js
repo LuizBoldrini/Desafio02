@@ -85,15 +85,15 @@ class cliente {
                             mensagem: `Cliente com id:${id} não foi encontrado!`
                         }
                     ])
-            } else if(erro) {
+            } else if (erro) {
                 resposta.status(500).json(erro)
-            }else {
+            } else {
                 resposta.status(200).json(cliente)
             }
         })
     }
     alterar(id, valores, resposta) {
-        if(this.buscaPorId) {
+        if (this.buscaPorId) {
             const sql = `SELECT * FROM Clientes WHERE id=${id}`
 
             conexao.query(sql, (erro, resultados) => {
@@ -105,39 +105,60 @@ class cliente {
                                 mensagem: `Cliente com id:${id} não foi encontrado!`
                             }
                         ])
-                } else if(erro) {
+                } else if (erro) {
                     resposta.status(500).json(erro)
-                }else {
+                } else {
                     resposta.status(200).json(cliente)
                 }
             })
-        }else{
+        } else {
             if (valores.birthDate) {
-            valores.birthDate = moment(valores.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
-        }
-        const sql = 'UPDATE Clientes SET ? WHERE id=?'
-
-        conexao.query(sql, [valores, id], (erro, resultados) => {
-             if (erro) {
-                resposta.status(404).json(erro)
-            } else {
-                resposta.status(200).json({ ...valores, id })
+                valores.birthDate = moment(valores.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
             }
+            const sql = 'UPDATE Clientes SET ? WHERE id=?'
 
-        })
+            conexao.query(sql, [valores, id], (erro, resultados) => {
+                if (erro) {
+                    resposta.status(500).json(erro)
+                } else {
+                    resposta.status(200).json({ ...valores, id })
+                }
+
+            })
         }
-        
+
     }
     deleta(id, resposta) {
-        const sql = 'DELETE FROM Clientes WHERE id=?'
+        if (this.buscaPorId) {
+            const sql = `SELECT * FROM Clientes WHERE id=${id}`
 
-        conexao.query(sql, id, (erro, resultados) => {
-            if (erro) {
-                resposta.status(404).json(erro)
-            } else {
-                resposta.status(200).json(`Cliente com id:${id} foi deletado com sucesso!`)
-            }
-        })
+            conexao.query(sql, (erro, resultados) => {
+                const cliente = resultados[0]
+                if (resultados.length == 0) {
+                    resposta.status(404).json(
+                        [
+                            {
+                                mensagem: `Cliente com id:${id} não foi encontrado!`
+                            }
+                        ])
+                } else if (erro) {
+                    resposta.status(500).json(erro)
+                } else {
+                    resposta.status(200).json(cliente)
+                }
+            })
+        } else {
+            const sql = 'DELETE FROM Clientes WHERE id=?'
+
+            conexao.query(sql, id, (erro, resultados) => {
+                if (erro) {
+                    resposta.status(404).json(erro)
+                } else {
+                    resposta.status(200).json(`Cliente com id:${id} foi deletado com sucesso!`)
+                }
+            })
+
+        }
     }
 }
 
