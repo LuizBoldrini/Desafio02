@@ -107,7 +107,7 @@ class cliente {
             if (erro) {
                 resposta.status(404).json(erro)
             } else {
-                resposta.status(200).json({ id })
+                resposta.status(200).json(`Cliente com id:${id} foi deletado com sucesso!`)
             }
         })
     }

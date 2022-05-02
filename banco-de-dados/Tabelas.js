@@ -27,7 +27,7 @@ class Tabelas {
     }
 
     criarTask() {
-        const sql = `CREATE TABLE IF NOT EXISTS Tasks ( description varchar(200) NOT NULL, date datetime NOT NULL, id int,CONSTRAINT fk_UserTask FOREIGN KEY (id) REFERENCES Clientes (id))`
+        const sql = `CREATE TABLE IF NOT EXISTS Tasks ( description varchar(200) NOT NULL, date datetime NOT NULL, user int,CONSTRAINT fk_UserTask FOREIGN KEY (user) REFERENCES Clientes (id))`
 
         this.conexao.query(sql, erro => {
             if (erro) {
