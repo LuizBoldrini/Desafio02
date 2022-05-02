@@ -148,7 +148,7 @@ class cliente {
                 }
             })
         } else {
-            const sql = 'DELETE FROM Clientes WHERE id=?'
+            const sql = 'DELETE FROM Clientes WHERE id= ?'
 
             conexao.query(sql, id, (erro, resultados) => {
                 if (erro) {

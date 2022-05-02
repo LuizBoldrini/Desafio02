@@ -7,7 +7,7 @@ module.exports = app => {
 
     app.get('/api/v1/task/:user', (requisicao, resposta) => {
         const user = parseInt(requisicao.params.user)
-        Task.buscarPorId(user, resposta)
+        Task.buscarPorUser(user, resposta)
     });
 
     app.post('/api/v1/task', (requisicao, resposta) => {
