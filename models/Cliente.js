@@ -93,7 +93,26 @@ class cliente {
         })
     }
     alterar(id, valores, resposta) {
-        if (valores.birthDate) {
+        if(this.buscaPorId) {
+            const sql = `SELECT * FROM Clientes WHERE id=${id}`
+
+            conexao.query(sql, (erro, resultados) => {
+                const cliente = resultados[0]
+                if (resultados.length == 0) {
+                    resposta.status(404).json(
+                        [
+                            {
+                                mensagem: `Cliente com id:${id} não foi encontrado!`
+                            }
+                        ])
+                } else if(erro) {
+                    resposta.status(500).json(erro)
+                }else {
+                    resposta.status(200).json(cliente)
+                }
+            })
+        }else{
+            if (valores.birthDate) {
             valores.birthDate = moment(valores.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
         }
         const sql = 'UPDATE Clientes SET ? WHERE id=?'
@@ -106,6 +125,8 @@ class cliente {
             }
 
         })
+        }
+        
     }
     deleta(id, resposta) {
         const sql = 'DELETE FROM Clientes WHERE id=?'

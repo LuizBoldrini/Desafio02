@@ -14,9 +14,8 @@ module.exports = app => {
 
     app.post('/api/v1/user', (requisicao, resposta) => {
         const cliente = requisicao.body
-        
-        Cliente.adiciona(cliente, resposta)
 
+        Cliente.adiciona(cliente, resposta)
     });
 
     app.put('/api/v1/user/:id', async (requisicao, resposta) => { 
